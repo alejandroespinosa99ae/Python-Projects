@@ -20,24 +20,31 @@ resp = httpx.get(url, headers=headers)
 # Parse raw HTML to use for querying
 html = HTMLParser(resp.text)
 
-print(html.css_first("title").text())
+#print(html.css_first("title").text())
 
+topGainers = html.css('li[data-id="TopGainers"]')
+print(topGainers)
+
+for topGainer in topGainers:
+    #print(topGainer.css_first("li").text()) #prints top gainers, losers, and most active
+    print(topGainer.css_first("ul").text())
 
 
 ### testing yfinance
 
-import yfinance as yf
+""" import yfinance as yf
 import pandas as pd
 
-ticker = "AAPL"
+ticker = ["AAPL", "VOO"]
 start_date = "2025-01-01"
 end_date = "2025-03-03"
 
-stock_data = yf.download(ticker, start = start_date, end = end_date)
+for x in ticker:
+    stock_data = yf.download(x, start = start_date, end = end_date)
+    print(stock_data) """
 
-#print(data)
 
-# OPTIONAL save as csv file
+# Save as csv file to create a dashboard in Excel
 # data.to_csv("stock_data.csv")
 
 
