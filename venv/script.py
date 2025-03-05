@@ -8,8 +8,10 @@ headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 
 # Information that the website gives will be stored in the following variable
 resp = httpx.get(url, headers=headers)
+# Parse raw HTML to use for querying
+html = HTMLParser(resp.text)
 
-print(resp.text)
+print(html.css_first("title").text())
 
 
 
