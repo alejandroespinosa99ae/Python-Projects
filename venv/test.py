@@ -19,4 +19,4 @@ print (stockData)
 tickers = ["AAPL", "GOOG"]
 data = yf.download(tickers,start="2025-03-07", period="1d",interval ="5m")
 print(data)
-data.to_csv("testdata.csv")
+#data.to_csv("testdata.csv")

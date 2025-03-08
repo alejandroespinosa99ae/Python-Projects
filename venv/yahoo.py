@@ -32,9 +32,9 @@ if ul_element:
     li_elements = ul_element.css("li")  # Get all <li> elements inside <ul>
     
     for li in li_elements:
-        x = 0
         print(li.text().strip())  # Print text of each <li>
         ListGainers.append(li)
+        List_stock_info.append(li.text().strip())
 
 
 print("\n")
@@ -58,33 +58,12 @@ from datetime import datetime as date
 import csv
 
 #ticker = ["AAPL", "TNXP"]
-start_date = "2024-01-01"
-end_date = date.today().strftime('%Y-%m-%d')
+start_date = date.today().strftime('%Y-%m-%d') # todays date in YYYY-MM-DD format
 folder_path = 'Top Gainers/'
 
-rank = 1
-for x in ListTickers:
-    stock_data = yf.download(x, start = start_date, end = end_date)
-    stock_data.to_csv(f"{folder_path}{rank}_{x}.csv")
-    rank = rank + 1 
+stock_data = yf.download(ListTickers, start = start_date, period="1d", interval="5m") # 
+stock_data.to_csv(f"{folder_path}.csv")
+List_stock_info.to_csv("StockInfo.csv")
+
     
 
-# Save as csv file to create a dashboard in Excel
-
-##stock_data.to_csv("stock_data.csv")
-#ListGainers.to_csv("ticker_names.csv")
-
-# Open (or create) a CSV file to write the list to
-""" with open('tickers.csv', 'w', newline='') as file:
-    writer = csv.writer(file)
-    
-    # Write the list as a single row
-    writer.writerow(ListTickers) """
-
-""" ticker = "TNXP"
-
-# Fetch data for a specific date
-stock_data = yf.download(ticker, start="2025-03-03", end="2025-03-04")
-
-# Print the closing price
-print(f"Closing price for", ticker, "  " ,stock_data) """
