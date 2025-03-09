@@ -36,6 +36,9 @@ if ul_element:
         ListGainers.append(li)
         List_stock_info.append(li.text().strip())
 
+#def description_spliter(desc_list):
+ #   for desc_item in desc_list:
+
 
 print("\n")
 print(ticker_name(ListGainers), "    ", list_to_string(ticker_name(ListGainers)))
@@ -59,11 +62,12 @@ import csv
 
 #ticker = ["AAPL", "TNXP"]
 start_date = date.today().strftime('%Y-%m-%d') # todays date in YYYY-MM-DD format
+#start_date = "2025-03-07"
 folder_path = 'Top Gainers/'
 
 stock_data = yf.download(ListTickers, start = start_date, period="1d", interval="5m") # 
-stock_data.to_csv(f"{folder_path}.csv")
-List_stock_info.to_csv("StockInfo.csv")
+#stock_data.to_csv(f"{folder_path}stock_data.csv")
+#List_stock_info.to_csv("StockInfo.csv")
 
     
 

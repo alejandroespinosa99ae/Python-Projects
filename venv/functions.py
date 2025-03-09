@@ -29,8 +29,102 @@ def list_to_string(list):
 
 #
 #
+s = "LB LandBridge Company LLC  67.72 +6.21 (+10.10%)"
+print("s has a size of : ", len(s), "    can you select a character from the string like an array? ", s.find("("))
+def description_spliter(desc_list): # input will be a list of strings
+   # create an empty dictionary
+   dictionary_of_stock_info = {}
+   #tempList = {"name", "company", "price", "gain", "percent"}
+   for s in desc_list:
+       # to get the percent
+       position = s.find("(")
+       percent = s[position:].strip() #"(+10.10%)"
+        
+        # to remove everything in between "(   )" technically after "("
+       s = s.replace(percent,"") #"LB LandBridge Company LLC  67.72 +6.21 "
+        
+        # to get the text that includes "+" and everything after until the end of the string
+       position = s.find("+")
+       gain = s[position:].strip() #"+6.21"
+
+        # to remove "+" and everthing after
+       s = s.replace(gain,"") #"LB LandBridge Company LLC  67.72 "
+        
+        # to get the ticker name
+       position = s.find(" ")
+       name = s[0:position].strip() #"LB"
+       
+        # to keep the text after the ticker name
+       s = s.replace(name,"").strip() #" LandBridge Company LLC  67.72 "
+        
+        # reversing the string to make it easier to get the stock price 
+       s_reversed = s[::-1] #" 27.76  CLL ynapmoC egdirBdnaL"
+        
+       position = s_reversed.find(" ")
+       price_reversed = s_reversed[:position] #"27.76"
+        
+       price = price_reversed[::-1] #"67.72"
+       s_reversed = s_reversed.replace(price_reversed,"") #" LandBridge Company LLC  "
+       company = s_reversed[::-1].strip() #"LandBridge Company LLC"
+       
+       dictionary_of_stock_info["name"] = name
+       dictionary_of_stock_info["company"] = company
+       dictionary_of_stock_info["price"] = price
+       dictionary_of_stock_info["gain"] = gain
+       dictionary_of_stock_info["percent"] = percent
+       
+   return(dictionary_of_stock_info)
+
+   
+""" example_dictionary = {}
+list_str = ["a","b"]
+counter = 0
+for s in list_str:
+    example_dictionary[s] = counter
+    counter = counter + 1
+
+print("this is my example dictionary:",example_dictionary) """
+#
+###########description_spliter(s)
+##string_to_num("GAP")
+
+def test_list(list_of_strings):
+    """ for string_ in list_of_strings:
+        position = string_.find("(")
+        percent = string_[position:].strip()
+        print(f"percent is: {percent}") """
+    for s in list_of_strings:
+        position = s.find("(")
+        percent = s[position:].strip()
+        print("percent: ", percent)
+
+        s = s.replace(percent,"")
+        print("s is : ", s)
+        position = s.find("+")
+        gain = s[position:].strip()
+        s = s.replace(gain,"")
+        print("s is : ", s, " and gain is: ", gain)
+        position = s.find(" ")
+        name = s[0:position].strip()
+        s = s.replace(name,"").strip()
+        print("s is : ", s, " name is: ", name)
+        print(f"The string  {s},  will be reversed to:  {s[::-1]}")
+        s_reversed = s[::-1]
+        print(f"the blank position is in {s_reversed.find(" ")}")
+        position = s_reversed.find(" ")
+        price_reversed = s_reversed[:position]
+        print(f"price_reversed is: {price_reversed}")
+        price = price_reversed[::-1]
+        s_reversed = s_reversed.replace(price_reversed,"")
+        s = s_reversed[::-1].strip()
+        print(f"s is now {s} and the price is {price}")
+
+testing_strings_ = ["GAP The Gap, Inc.  23.15 +3.67 (+18.84%)","LB LandBridge Company LLC  67.72 +6.21 (+10.10%)"]
+test_list(testing_strings_)
+print(description_spliter(testing_strings_))
 #
 
+# https://www.reddit.com/r/LearnUselessTalents/comments/avb5bi/how_do_i_learn_to_calculate_the_day_of_the_week/
 # Date format is YYYY-MM-DD
 def day_of_week(date):
     day = int(date[8:])
@@ -38,13 +132,6 @@ def day_of_week(date):
     week_day = (year_code(date) + month_code(date) + century_code(date) + day -leap_year_modifier)%7
     #print("Year code is: ", year_code(date), " month code is ", month_code(date), " century code is: ", century_code(date), " day is: ", day, " leap year modifier is: ", leap_year_modifier)
     return week_day
-
-"""     # Determine if the year is a leap year
-    if(is_leap_year(date) == True):
-        year_code(date) + month_code(date) + century_code(date) + day -leap_year_modifier
-    else: # If not a leap year """
-
-
 
 # Function to determine if leap year
 def is_leap_year(year):
@@ -109,7 +196,8 @@ def day_number(date):
     else:
         return int(date[8:])
     
-testDate = "2025-03-08"
+""" testDate = "2025-03-08"
 #testDate = "1969-12-20"
 testDate = "2001-08-25"
 print("This is the number for the day of the week " ,day_of_week(testDate))
+ """
