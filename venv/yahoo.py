@@ -11,7 +11,11 @@
 import httpx
 from selectolax.parser import HTMLParser
 # Import the functions I made
-from functions import ticker_name, list_to_string
+from functions import ticker_name, list_to_string, description_spliter
+import pandas as pd
+import yfinance as yf
+from datetime import datetime as date
+import csv
 
 url = "https://finance.yahoo.com"
 # To access the web
@@ -36,12 +40,8 @@ if ul_element:
         ListGainers.append(li)
         List_stock_info.append(li.text().strip())
 
-#def description_spliter(desc_list):
- #   for desc_item in desc_list:
-
-
 print("\n")
-print(ticker_name(ListGainers), "    ", list_to_string(ticker_name(ListGainers)))
+#print(ticker_name(ListGainers), "    ", list_to_string(ticker_name(ListGainers)))
 print('\n')
 ListTickers = ticker_name(ListGainers)
 
@@ -56,18 +56,24 @@ if ul_element:
 
 ### testing yfinance
 
-import yfinance as yf
-from datetime import datetime as date
-import csv
-
 #ticker = ["AAPL", "TNXP"]
 start_date = date.today().strftime('%Y-%m-%d') # todays date in YYYY-MM-DD format
-#start_date = "2025-03-07"
+start_date = "2025-03-07"
 folder_path = 'Top Gainers/'
 
 stock_data = yf.download(ListTickers, start = start_date, period="1d", interval="5m") # 
-#stock_data.to_csv(f"{folder_path}stock_data.csv")
+stock_data.to_csv(f"{folder_path}stock_data.csv")
+##df = pd.DataFrame(stock_data)
+##df.to_excel(f"{folder_path}stock_data.xlsx")
+print(f"Stock_data saved to {folder_path}")
 #List_stock_info.to_csv("StockInfo.csv")
 
-    
+gainerInfo = description_spliter(List_stock_info)
+#gainerInfo.to_csv(f"{folder_path}gainerInfo.csv")
 
+# Convert the dictionary to a DataFrame
+df = pd.DataFrame(gainerInfo)
+
+# Save the DataFrame to an Excel file
+df.to_excel(f"{folder_path}Gainer_info.xlsx", index=False) 
+print("GainerInfo saved to Gainer_info.xlsx")

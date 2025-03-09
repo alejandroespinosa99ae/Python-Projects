@@ -27,13 +27,16 @@ def list_to_string(list):
 #ELF e.l.f. Beauty, Inc.  70.68 +6.26 (+9.72%)
 #TGTX TG Therapeutics, Inc.  38.44 +3.25 (+9.24%)
 
-#
-#
-s = "LB LandBridge Company LLC  67.72 +6.21 (+10.10%)"
-print("s has a size of : ", len(s), "    can you select a character from the string like an array? ", s.find("("))
 def description_spliter(desc_list): # input will be a list of strings
    # create an empty dictionary
    dictionary_of_stock_info = {}
+
+   listName = []
+   listCompany = []
+   listPrice = []
+   listGain = []
+   listPercent = []
+
    #tempList = {"name", "company", "price", "gain", "percent"}
    for s in desc_list:
        # to get the percent
@@ -67,14 +70,18 @@ def description_spliter(desc_list): # input will be a list of strings
        s_reversed = s_reversed.replace(price_reversed,"") #" LandBridge Company LLC  "
        company = s_reversed[::-1].strip() #"LandBridge Company LLC"
        
-       dictionary_of_stock_info["name"] = name
-       dictionary_of_stock_info["company"] = company
-       dictionary_of_stock_info["price"] = price
-       dictionary_of_stock_info["gain"] = gain
-       dictionary_of_stock_info["percent"] = percent
+       listName.append(name)
+       listCompany.append(company)
+       listPrice.append(price)
+       listGain.append(gain)
+       listPercent.append(percent)
        
+   dictionary_of_stock_info["Ticker"] = listName
+   dictionary_of_stock_info["Company"] = listCompany
+   dictionary_of_stock_info["Price"] = listPrice
+   dictionary_of_stock_info["Gain"] = listGain
+   dictionary_of_stock_info["Percent"] = listPercent 
    return(dictionary_of_stock_info)
-
    
 """ example_dictionary = {}
 list_str = ["a","b"]
@@ -85,43 +92,11 @@ for s in list_str:
 
 print("this is my example dictionary:",example_dictionary) """
 #
-###########description_spliter(s)
-##string_to_num("GAP")
 
-def test_list(list_of_strings):
-    """ for string_ in list_of_strings:
-        position = string_.find("(")
-        percent = string_[position:].strip()
-        print(f"percent is: {percent}") """
-    for s in list_of_strings:
-        position = s.find("(")
-        percent = s[position:].strip()
-        print("percent: ", percent)
-
-        s = s.replace(percent,"")
-        print("s is : ", s)
-        position = s.find("+")
-        gain = s[position:].strip()
-        s = s.replace(gain,"")
-        print("s is : ", s, " and gain is: ", gain)
-        position = s.find(" ")
-        name = s[0:position].strip()
-        s = s.replace(name,"").strip()
-        print("s is : ", s, " name is: ", name)
-        print(f"The string  {s},  will be reversed to:  {s[::-1]}")
-        s_reversed = s[::-1]
-        print(f"the blank position is in {s_reversed.find(" ")}")
-        position = s_reversed.find(" ")
-        price_reversed = s_reversed[:position]
-        print(f"price_reversed is: {price_reversed}")
-        price = price_reversed[::-1]
-        s_reversed = s_reversed.replace(price_reversed,"")
-        s = s_reversed[::-1].strip()
-        print(f"s is now {s} and the price is {price}")
-
-testing_strings_ = ["GAP The Gap, Inc.  23.15 +3.67 (+18.84%)","LB LandBridge Company LLC  67.72 +6.21 (+10.10%)"]
-test_list(testing_strings_)
-print(description_spliter(testing_strings_))
+""" testing_strings_ = ["GAP The Gap, Inc.  23.15 +3.67 (+18.84%)","LB LandBridge Company LLC  67.72 +6.21 (+10.10%)"]
+info_to_download = description_spliter(testing_strings_)
+print(info_to_download)
+info_to_download.to_csv("Stock Information.csv") """
 #
 
 # https://www.reddit.com/r/LearnUselessTalents/comments/avb5bi/how_do_i_learn_to_calculate_the_day_of_the_week/
