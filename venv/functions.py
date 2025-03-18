@@ -47,7 +47,7 @@ def description_spliter(desc_list): # input will be a list of strings
        s = s.replace(percent,"") #"LB LandBridge Company LLC  67.72 +6.21 "
         
         # to get the text that includes "+" and everything after until the end of the string
-       position = s.find("+")
+       position = s.find("+")-1
        gain = s[position:].strip() #"+6.21"
 
         # to remove "+" and everthing after

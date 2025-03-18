@@ -54,20 +54,24 @@ if ul_element:
     for li in li_elements:
         print(li.text().strip())  # Print text of each <li>
 
-### testing yfinance
 
 #ticker = ["AAPL", "TNXP"]
 start_date = date.today().strftime('%Y-%m-%d') # todays date in YYYY-MM-DD format
-start_date = "2025-03-07"
+#start_date = "2025-03-07"
 folder_path = 'Top Gainers/'
 
 stock_data = yf.download(ListTickers, start = start_date, period="1d", interval="5m") # 
 stock_data.to_csv(f"{folder_path}stock_data.csv")
-##df = pd.DataFrame(stock_data)
-##df.to_excel(f"{folder_path}stock_data.xlsx")
+
+######################
+# https://stackoverflow.com/questions/17684610/python-convert-csv-to-xlsx
+read_file = pd.read_csv(f"{folder_path}stock_data.csv") # read the csv file using pandas
+read_file.to_excel(f"{folder_path}stock_data.xlsx", index=None, header= True)
+#####################
 print(f"Stock_data saved to {folder_path}")
 #List_stock_info.to_csv("StockInfo.csv")
 
+# returns a dictionary of lists stored in gainerInfo
 gainerInfo = description_spliter(List_stock_info)
 #gainerInfo.to_csv(f"{folder_path}gainerInfo.csv")
 
