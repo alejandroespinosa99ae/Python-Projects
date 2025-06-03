@@ -34,9 +34,7 @@ The final output is a clean Excel dashboard showing:
 
 ## 📌 Notes
 
-- The script is designed to pull data once per day.
-- You can automate it using **Task Scheduler** (Windows) or **cron** (Linux/Mac).
-- Make sure Excel’s data connection settings allow for automatic refresh.
+- This project is still a work in progress.
 
 ---
 
