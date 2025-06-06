@@ -1,10 +1,10 @@
-# 📈 Yahoo Finance Stock Scraper Dashboard
+# Yahoo Finance Stock Scraper Dashboard
 
 This project is a simple web scraping tool built with Python that extracts the **top 5 gainers** and **top 5 losers** from the [Yahoo Finance](https://finance.yahoo.com/) website. The data is processed using **Power Query** and visualized in an **auto-refreshing Excel dashboard**.
 
 ---
 
-## 🔧 Features
+## Features
 
 - Scrapes daily stock market data from Yahoo Finance
 - Extracts and formats:
@@ -15,24 +15,24 @@ This project is a simple web scraping tool built with Python that extracts the *
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 - **Python** – for scraping and basic processing
 - **Selectolax / requests** – for HTML parsing and web requests
-- **Power Query** – for data cleaning and shaping
+- **Power Query** – for data cleaning automation
 - **Excel** – for dashboard visualization and daily updates
 
 ---
 
-## 📊 Output
+## Output
 
-The final output is a clean Excel dashboard showing:
-- 📈 Top 5 stock gainers of the day
-- 📉 Top 5 stock losers of the day
+The final output is an Excel dashboard showcasing
+- Top 5 stock gainers of the day
+- Top 5 stock losers of the day
 
 ---
 
-## 📌 Notes
+## Notes
 
 - This project is still a work in progress.
 
